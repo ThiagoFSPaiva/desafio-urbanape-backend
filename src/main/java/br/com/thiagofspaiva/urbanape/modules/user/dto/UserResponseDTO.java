@@ -1,7 +1,7 @@
 package br.com.thiagofspaiva.urbanape.modules.user.dto;
 
 import br.com.thiagofspaiva.urbanape.modules.user.models.UserEntity;
-import br.com.thiagofspaiva.urbanape.modules.user.models.UserType;
+import br.com.thiagofspaiva.urbanape.modules.user.models.UserRole;
 
 import java.util.UUID;
 
@@ -10,7 +10,7 @@ public record UserResponseDTO(
         String name,
         String email,
 
-        UserType type
+        UserRole role
 
 ){
     public static UserResponseDTO ToDto(UserEntity entity) {
@@ -18,7 +18,7 @@ public record UserResponseDTO(
                 entity.getId(),
                 entity.getEmail(),
                 entity.getName(),
-                entity.getType()
+                entity.getRole()
         );
     }
 }

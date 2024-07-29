@@ -37,9 +37,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserResponseDTO create(UserEntity entity) {
         emailExists(entity.getEmail());
-
+        System.out.println(entity);
         entity.setPassword(passwordEncoder.encode(entity.getPassword()));
         userRepository.save(entity);
+
 
         return UserResponseDTO.ToDto(entity);
     }
@@ -66,7 +67,7 @@ public class UserServiceImpl implements UserService {
     }
 
     public void emailExists(String email) {
-        if (userRepository.findByEmail(email).isPresent()) {
+        if (userRepository.findByEmail(email) != null) {
             throw new DataAlreadyExistsException("O email já está em uso.");
         }
     }

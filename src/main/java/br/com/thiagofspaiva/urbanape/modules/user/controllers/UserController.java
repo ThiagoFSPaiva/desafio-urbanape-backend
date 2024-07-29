@@ -21,11 +21,13 @@ public class UserController {
 
     @PostMapping()
     public ResponseEntity<UserResponseDTO> create(@Valid @RequestBody UserRequestDTO user){
+        System.out.println(user);
         return ResponseEntity.status(HttpStatus.CREATED).body( userService.create(user.toEntity()));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<UserResponseDTO> update(@PathVariable UUID id, @RequestBody UserRequestDTO user){
+
         return ResponseEntity.status(HttpStatus.OK).body(userService.update(id,user.toEntity()));
     }
 

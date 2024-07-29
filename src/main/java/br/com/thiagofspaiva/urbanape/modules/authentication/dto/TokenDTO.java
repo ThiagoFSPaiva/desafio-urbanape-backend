@@ -4,10 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
-@Data
-@AllArgsConstructor
-@Builder
-public class TokenDTO {
-    private String token;
-    private String type;
-}
+
+public record TokenDTO (
+        String token,
+        String type,
+        String issuer
+){ }
+
+
+

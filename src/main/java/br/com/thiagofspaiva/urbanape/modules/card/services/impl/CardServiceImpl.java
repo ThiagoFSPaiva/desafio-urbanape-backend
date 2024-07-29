@@ -49,8 +49,8 @@ public class CardServiceImpl implements CardService {
     }
 
     @Override
-    public CardResponseDTO create(CardEntity card, UUID userId) { // TODO Usar entity nos parametros para não quebrar a Clean Arch
-        userService.findById(userId); //TODO trocar isso por requisição quando migrar para microserviço
+    public CardResponseDTO create(CardEntity card, UUID userId) {
+        userService.findById(userId);
         card.setUserId(userId);
 
         return CardResponseDTO.toDto(cardRepository.save(card));
