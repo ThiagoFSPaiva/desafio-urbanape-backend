@@ -1,6 +1,6 @@
 package br.com.thiagofspaiva.urbanape.security;
 
-import br.com.thiagofspaiva.urbanape.modules.authentication.services.SecurityFilter;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -20,8 +20,11 @@ public class SecurityConfig {
 
     final private SecurityFilter securityFilter;
 
-    public SecurityConfig(SecurityFilter securityFilter){
+    final private CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
+
+    public SecurityConfig(SecurityFilter securityFilter, CustomAuthenticationEntryPoint customAuthenticationEntryPoint){
         this.securityFilter = securityFilter;
+        this.customAuthenticationEntryPoint = customAuthenticationEntryPoint;
     }
 
     @Bean
@@ -40,6 +43,9 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.PUT, "/user/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/user/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
+                )
+                .exceptionHandling(exception -> exception
+                        .authenticationEntryPoint(customAuthenticationEntryPoint)
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
         ;

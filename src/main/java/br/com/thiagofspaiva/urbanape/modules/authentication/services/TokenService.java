@@ -23,7 +23,8 @@ public class TokenService {
 
             String token = JWT.create()
                     .withIssuer("urbanape-backend")
-                    .withSubject(user.getEmail())
+                    .withSubject(String.valueOf(user.getId()))
+                    .withClaim("role", user.getRole().toString())
                     .withExpiresAt(genExpirationDate())
                     .sign(algorithm);
 
