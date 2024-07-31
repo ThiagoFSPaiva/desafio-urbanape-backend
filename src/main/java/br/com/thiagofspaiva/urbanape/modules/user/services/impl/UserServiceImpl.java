@@ -1,6 +1,7 @@
 package br.com.thiagofspaiva.urbanape.modules.user.services.impl;
 import br.com.thiagofspaiva.urbanape.exceptions.DataAlreadyExistsException;
 import br.com.thiagofspaiva.urbanape.exceptions.NotFoundException;
+import br.com.thiagofspaiva.urbanape.modules.user.dto.UserRequestDTO;
 import br.com.thiagofspaiva.urbanape.modules.user.models.UserEntity;
 import br.com.thiagofspaiva.urbanape.modules.user.dto.UserResponseDTO;
 import br.com.thiagofspaiva.urbanape.modules.user.repository.UserRepository;
@@ -22,9 +23,11 @@ public class UserServiceImpl implements UserService {
         this.userRepository = userRepository;
     }
     @Override
-    public UserEntity findById(UUID id) {
-        return userRepository.findById(id)
+    public UserResponseDTO findById(UUID id) {
+        var user = userRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Usuário não encontrado"));
+
+        return UserResponseDTO.ToDto(user);
 
     }
     @Override
@@ -47,7 +50,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponseDTO update(UUID id, UserEntity entity) {
-        var user = findById(id);
+        var user = userRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Usuário não encontrado"));
         emailExists(entity.getEmail());
 
         user.setName(entity.getName());
@@ -62,7 +66,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void delete(UUID id) {
-        UserEntity user = findById(id);
+        UserEntity user = userRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Usuário não encontrado"));
         userRepository.delete(user);
     }
 

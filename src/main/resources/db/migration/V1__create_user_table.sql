@@ -16,3 +16,12 @@ CREATE TABLE IF NOT EXISTS `card` (
 
     FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE
 );
+
+INSERT INTO `user` (`id`, `name`, `email`, `role`, `password`)
+VALUES (
+           UNHEX(REPLACE(UUID(), '-', '')),
+           'Thiagao',
+           'admin.teste@gmail.com',
+           'ADMIN',
+           '$2a$12$KNp0lxhVxeNUfhI9h5Tw8Oh/JBNeUyKmC3DlxQmS6zhcUQGD/H2Xe'
+       );

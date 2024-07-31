@@ -7,7 +7,7 @@ import java.util.UUID;
 
 public interface UserService {
 
-    UserEntity findById(UUID id);
+    UserResponseDTO findById(UUID id);
     Iterable<UserResponseDTO> findAll();
 
     UserResponseDTO create(UserEntity user);

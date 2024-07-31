@@ -37,7 +37,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserEntity> findById(@PathVariable UUID id){
+    public ResponseEntity<UserResponseDTO> findById(@PathVariable UUID id){
         return ResponseEntity.status(HttpStatus.OK).body(userService.findById(id));
     }
     @DeleteMapping("/{id}")

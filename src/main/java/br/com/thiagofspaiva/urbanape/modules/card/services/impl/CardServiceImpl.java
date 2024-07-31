@@ -52,6 +52,7 @@ public class CardServiceImpl implements CardService {
     public CardResponseDTO create(CardEntity card, UUID userId) {
         userService.findById(userId);
         card.setUserId(userId);
+        card.setStatus(true);
 
         return CardResponseDTO.toDto(cardRepository.save(card));
 
