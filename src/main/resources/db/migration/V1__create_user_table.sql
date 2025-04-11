@@ -23,5 +23,5 @@ VALUES (
            'Thiagao',
            'admin.teste@gmail.com',
            'ADMIN',
-           '$2a$12$KNp0lxhVxeNUfhI9h5Tw8Oh/JBNeUyKmC3DlxQmS6zhcUQGD/H2Xe'
+           '$2a$12$Wsd6rNgvh5WK.hpZBenz..I19gcJWJ1VwOe3/qouYAktASuYF/sOS'
        );
